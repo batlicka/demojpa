@@ -6,7 +6,8 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "user_idx")
+    @SequenceGenerator(name= "user_idx", sequenceName = "user_idx")
     @Column(name = "user_id", nullable = false)
     private Integer id;
 
@@ -20,7 +21,8 @@ public class User {
 
     }
 
-    public User(String username, String email) {
+    public User(Integer id, String username, String email) {
+        this.id = id;
         this.username = username;
         this.email = email;
     }

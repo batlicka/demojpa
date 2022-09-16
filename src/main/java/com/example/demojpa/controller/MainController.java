@@ -28,7 +28,7 @@ public class MainController {
     @GetMapping("/insertUser")
     @Transactional
     public User insert(){
-        User newUser = new User("pepa", "pepa@test.cz");
+        User newUser = new User(null, "pepa", "pepa@test.cz");
         return (User) userRepository.save(newUser);
     }
 }
