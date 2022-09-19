@@ -46,7 +46,7 @@ public class UserService {
         return users.stream().flatMap(x->x.getDogs().stream()).map(Dog::getName).collect(Collectors.toList());
     }
 
-//    public  List<User> getFetchJoin() {
-//        return em.createQuery("SELECT u FROM User u JOIN FETCH u.dogs",User.class).getResultList();
-//    }
+    public  List<User> getFetchJoin() {
+        return em.createQuery("SELECT u FROM User u JOIN FETCH u.dogs",User.class).getResultList();
+    }
 }
