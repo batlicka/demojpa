@@ -1,6 +1,7 @@
 package com.example.demojpa.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -9,29 +10,36 @@ public class User {
     @GeneratedValue(generator = "user_idx")
     @SequenceGenerator(name= "user_idx", sequenceName = "user_idx")
     @Column(name = "user_id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "username", nullable = false, length = 50)
     private String username;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+    @OneToMany(mappedBy = "owner",  cascade = CascadeType.ALL)
+    private List<Dog> dogs;
 
     public User() {
 
     }
 
-    public User(Integer id, String username, String email) {
+    public User(Long id, String username, List<Dog> dogs) {
         this.id = id;
         this.username = username;
-        this.email = email;
+
+        for (Dog x : dogs) {
+            System.out.println("this: "+this);
+            x.setOwner(this);
+        }
+        this.dogs = dogs;
+
+        //this.dogs = dogs.stream().peek(x->x.setOwner(this)).toList();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,12 +51,7 @@ public class User {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Dog> getDogs() {
+        return dogs;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
 }

@@ -1,9 +1,9 @@
 package com.example.demojpa.data;
 
-import com.example.demojpa.entity.User;
+import com.example.demojpa.entity.Dog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface DogRepository extends JpaRepository<Dog, Long> {
 }
